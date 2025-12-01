@@ -1,0 +1,117 @@
+// 1. SIZE OF DOUBLY LINKED LIST
+
+// #include <iostream>
+// using namespace std;
+
+// struct Node {
+//     int data;
+//     Node* prev;
+//     Node* next;
+// };
+
+// Node* head = NULL;
+
+// // Insert at end (for testing)
+// void insertEnd(int val) {
+//     Node* newNode = new Node();
+//     newNode->data = val;
+//     newNode->prev = NULL;
+//     newNode->next = NULL;
+
+//     if (head == NULL) {
+//         head = newNode;
+//         return;
+//     }
+
+//     Node* temp = head;
+//     while (temp->next != NULL) {
+//         temp = temp->next;
+//     }
+
+//     temp->next = newNode;
+//     newNode->prev = temp;
+// }
+
+// // Function to count size
+// int sizeDoubly() {
+//     int count = 0;
+//     Node* temp = head;
+//     while (temp != NULL) {
+//         count++;
+//         temp = temp->next;
+//     }
+//     return count;
+// }
+
+// int main() {
+//     insertEnd(10);
+//     insertEnd(20);
+//     insertEnd(30);
+//     insertEnd(40);
+
+//     cout << "Size of Doubly Linked List = " << sizeDoubly() << endl;
+//     return 0;
+// }
+
+
+
+
+
+
+//2. SIZE OF CIRCULAR LINKED LIST
+
+
+#include <iostream>
+using namespace std;
+
+struct Node {
+    int data;
+    Node* next;
+};
+
+Node* head = NULL;
+
+// Insert at end (for testing)
+void insertEnd(int val) {
+    Node* newNode = new Node();
+    newNode->data = val;
+
+    if (head == NULL) {
+        head = newNode;
+        head->next = head;   // circular
+        return;
+    }
+
+    Node* temp = head;
+    while (temp->next != head) {
+        temp = temp->next;
+    }
+
+    temp->next = newNode;
+    newNode->next = head;   // close the circle
+}
+
+int sizeCircular() {
+    if (head == NULL)
+        return 0;
+
+    int count = 0;
+    Node* temp = head;
+
+    do {
+        count++;
+        temp = temp->next;
+    } while (temp != head);
+
+    return count;
+}
+
+int main() {
+    insertEnd(5);
+    insertEnd(15);
+    insertEnd(25);
+    insertEnd(35);
+
+    cout << "Size of Circular Linked List = " << sizeCircular() << endl;
+    return 0;
+}
